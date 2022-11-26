@@ -2,6 +2,8 @@ package zoo;
 
 import java.util.Objects;
 
+import static zoo.ValidateUtils.validateString;
+
 public abstract class Mammals extends Animals {
 
     String livingEnvironment;
@@ -14,8 +16,9 @@ public abstract class Mammals extends Animals {
 
     public Mammals(String name, int age, String livingEnvironment, double movementSpeed) {
         super(name, age);
-        setLivingEnvironment(livingEnvironment);
-        setMovementSpeed(movementSpeed);
+
+        this.livingEnvironment = validateString(livingEnvironment);
+        this.movementSpeed = validateMovementSpeed(movementSpeed);
     }
 
     public abstract void walk();
@@ -26,11 +29,7 @@ public abstract class Mammals extends Animals {
 
     public void setLivingEnvironment(String livingEnvironment) {
 
-        if (livingEnvironment != null && !livingEnvironment.isEmpty() && !livingEnvironment.isBlank()) {
-            this.livingEnvironment = livingEnvironment;
-        } else {
-            this.livingEnvironment = "no information";
-        }
+        this.livingEnvironment = validateString(livingEnvironment);
     }
 
     public double getMovementSpeed() {
@@ -39,11 +38,7 @@ public abstract class Mammals extends Animals {
 
     public void setMovementSpeed(double movementSpeed) {
 
-        if (movementSpeed > 0) {
-            this.movementSpeed = movementSpeed;
-        } else {
-            this.movementSpeed = 0.0;
-        }
+        this.movementSpeed = validateMovementSpeed(movementSpeed);
     }
 
     @Override
@@ -64,5 +59,9 @@ public abstract class Mammals extends Animals {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), livingEnvironment, movementSpeed);
+    }
+
+    public static double validateMovementSpeed(double value) {
+        return value < 0 ? Math.abs(value) : value;
     }
 }

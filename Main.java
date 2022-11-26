@@ -156,7 +156,7 @@ public class Main {
         Bus gaz = new Bus("ГАЗ", "4234", 2022, "Россия", "синий",
                 100);
         Bus paz = new Bus("ПАЗ", "4234", 2016, "Россия", "белый",
-                8);
+                80);
 
        liAZ.showCharacteristics();
        gaz.showCharacteristics();

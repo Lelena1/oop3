@@ -2,7 +2,9 @@ package zoo;
 
 import java.util.Objects;
 
-public class Predators extends Mammals{
+import static zoo.ValidateUtils.validateString;
+
+public class Predators extends Mammals {
 
     String typeOfFood;
 
@@ -13,7 +15,7 @@ public class Predators extends Mammals{
     public Predators(String name, int age, String livingEnvironment, double movementSpeed, String typeOfFood) {
         super(name, age, livingEnvironment, movementSpeed);
 
-        setTypeOfFood(typeOfFood);
+        this.typeOfFood = validateString(typeOfFood);
     }
 
     public void hunt() {
@@ -28,23 +30,22 @@ public class Predators extends Mammals{
     }
 
     public void setTypeOfFood(String typeOfFood) {
-        if (typeOfFood != null && !typeOfFood.isEmpty() && !typeOfFood.isBlank()) {
-            this.typeOfFood = typeOfFood;
-        } else {
-            this.typeOfFood = "no information";
-        }
+        this.typeOfFood = validateString(typeOfFood);
     }
 
     @Override
     public void walk() {
+        System.out.println("Walking in search of food");
     }
 
     @Override
     public void eat() {
+        System.out.println("I eat everything I catch");
     }
 
     @Override
     public void go() {
+        System.out.println("I'm moving to where there's more food");
     }
 
     @Override

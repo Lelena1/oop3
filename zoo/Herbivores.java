@@ -2,6 +2,8 @@ package zoo;
 
 import java.util.Objects;
 
+import static zoo.ValidateUtils.validateString;
+
 public class Herbivores extends Mammals {
 
     String typeOfFood;
@@ -13,7 +15,7 @@ public class Herbivores extends Mammals {
     public Herbivores(String name, int age, String livingEnvironment, double movementSpeed, String typeOfFood) {
         super(name, age, livingEnvironment, movementSpeed);
 
-        setTypeOfFood(typeOfFood);
+        this.typeOfFood = validateString(typeOfFood);
     }
 
     public void graze() {
@@ -28,23 +30,22 @@ public class Herbivores extends Mammals {
     }
 
     public void setTypeOfFood(String typeOfFood) {
-        if (typeOfFood != null && !typeOfFood.isEmpty() && !typeOfFood.isBlank()) {
-            this.typeOfFood = typeOfFood;
-        } else {
-            this.typeOfFood = "no information";
-        }
+        this.typeOfFood = validateString(typeOfFood);
     }
 
     @Override
     public void walk() {
+        System.out.println("I like to run fast");
     }
 
     @Override
     public void eat() {
+        System.out.println("Eating grass");
     }
 
     @Override
     public void go() {
+        System.out.println("I move quickly to any place I want");
     }
 
     @Override

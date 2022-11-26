@@ -131,23 +131,13 @@ public class Car extends Transport {
                int numberOfSeats, boolean isSummerTires, Key key, Insurance insurance, String refill) {
         super(brand, model, productionYear, productionCountry, color);
 
-        if (engineVolume > 0) {
+        this.engineVolume = validateEngineVolume(engineVolume);
 
-            this.engineVolume = engineVolume;
-        } else {
-            this.engineVolume = 2.7;
-        }
-
-        this.transmission = transmission;
+        this.transmission = validateCarCharacteristics(transmission);
 
         this.bodeType = bodeType;
 
-        if (registrationNumber != null && !registrationNumber.isEmpty() && !registrationNumber.isBlank() &&
-                registrationNumber.length() == 9) {
-            this.registrationNumber = registrationNumber;
-        } else {
-            this.registrationNumber = "Регистрационный номер указан неверно";
-        }
+        this.registrationNumber = validateRegistrationNumber(registrationNumber);
 
         this.numberOfSeats = numberOfSeats;
 
@@ -168,7 +158,7 @@ public class Car extends Transport {
             this.insurance = insurance;
         }
 
-        setRefill(refill);
+        this.refill = validateCarCharacteristics(refill);
     }
 
     @Override
@@ -213,9 +203,7 @@ public class Car extends Transport {
     }
 
     public void setRefill(String refill) {
-        if (refill != null && !refill.isEmpty() && !refill.isBlank()) {
-            this.refill = refill;
-        }
+        this.refill = validateCarCharacteristics(refill);
     }
 
     public void setKey(Key key) {
@@ -231,31 +219,16 @@ public class Car extends Transport {
     }
 
     public void setEngineVolume(double engineVolume) {
-        if (engineVolume > 0) {
-
-            this.engineVolume = engineVolume;
-        } else {
-            this.engineVolume = 2.7;
-        }
+        this.engineVolume = validateEngineVolume(engineVolume);
     }
 
     public void setTransmission(String transmission) {
 
-        if (transmission != null && !transmission.isEmpty() && !transmission.isBlank()) {
-
-            this.transmission = transmission;
-        } else {
-            this.transmission = "механика";
-        }
+        this.transmission = validateCarCharacteristics(transmission);
     }
 
     public void setRegistrationNumber(String registrationNumber) {
-        if (registrationNumber != null && !registrationNumber.isEmpty() && !registrationNumber.isBlank() &&
-                registrationNumber.length() == 9) {
-            this.registrationNumber = registrationNumber;
-        } else {
-            this.registrationNumber = "Регистрационный номер указан неверно";
-        }
+        this.registrationNumber = validateRegistrationNumber(registrationNumber);
     }
 
     public void setIsSummerTires(boolean isSummerTires) {
@@ -290,6 +263,21 @@ public class Car extends Transport {
         }
         return true;
     }
+
+    public static double validateEngineVolume(double value) {
+        return value < 0 ? 2.7 : value;
+    }
+
+    public static String validateCarCharacteristics(String value) {
+        return value == null && value.isEmpty() && value.isBlank() ? "механика" : value;
+    }
+
+    public static String validateRegistrationNumber(String registrationNumber) {
+        return registrationNumber == null && registrationNumber.isBlank() &&
+                registrationNumber.length() != 9 ? "Регистрационный номер указан неверно" : registrationNumber;
+
+    }
+
 
     @Override
     public String toString() {

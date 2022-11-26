@@ -2,6 +2,8 @@ package zoo;
 
 import java.util.Objects;
 
+import static zoo.ValidateUtils.validateString;
+
 public class Amphibians extends Animals {
 
     String livingEnvironment;
@@ -13,7 +15,7 @@ public class Amphibians extends Animals {
     public Amphibians(String name, int age, String livingEnvironment) {
         super(name, age);
 
-        setLivingEnvironment(livingEnvironment);
+        this.livingEnvironment = validateString(livingEnvironment);
     }
 
     public void hunt() {
@@ -28,19 +30,17 @@ public class Amphibians extends Animals {
     }
 
     public void setLivingEnvironment(String livingEnvironment) {
-        if (livingEnvironment != null && !livingEnvironment.isEmpty() && !livingEnvironment.isBlank()) {
-            this.livingEnvironment = livingEnvironment;
-        } else {
-            this.livingEnvironment = "no information";
-        }
+        this.livingEnvironment = validateString(livingEnvironment);
     }
 
     @Override
     public void eat() {
+        System.out.println("I eat insects");
     }
 
     @Override
     public void go() {
+        System.out.println("Sometimes I like to swim");
     }
 
     @Override

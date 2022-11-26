@@ -2,6 +2,9 @@ package zoo;
 
 import java.util.Objects;
 
+import static zoo.ValidateUtils.validateNum;
+import static zoo.ValidateUtils.validateString;
+
 public abstract class Animals {
     String name;
     int age;
@@ -11,11 +14,8 @@ public abstract class Animals {
     }
 
     public Animals(String name, int age) {
-        setName(name);
-
-        if (age >= 0) {
-            this.age = age;
-        }
+        this.name = validateString(name);
+        this.age = validateNum(age);
     }
 
     public abstract void eat();
@@ -30,11 +30,7 @@ public abstract class Animals {
     }
 
     public final void setName(String name) {
-        if (name != null && !name.isEmpty() && !name.isBlank()) {
-            this.name = name;
-        } else {
-            this.name = "no information";
-        }
+        this.name = validateString(name);
     }
 
     public int getAge() {

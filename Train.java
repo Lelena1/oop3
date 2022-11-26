@@ -1,3 +1,5 @@
+import static zoo.ValidateUtils.*;
+
 public class Train extends Transport {
 
     double travelPrice;
@@ -17,19 +19,12 @@ public class Train extends Transport {
                  int wagonsCount, String refill) {
         super(brand, model, productionYear, productionCountry, maxSpeed);
 
-        if (departureStation != null && !departureStation.isEmpty() && !departureStation.isBlank()) {
-            this.departureStation = departureStation;
-        }
-
-        if (arrivalStation != null && !arrivalStation.isEmpty() && !arrivalStation.isBlank()) {
-            this.arrivalStation = arrivalStation;
-        } else {
-            this.arrivalStation = "данные не корректные";
-        }
-        setTravelPrice(travelPrice);
-        setTravelTime(travelTime);
-        setWagonsCount(wagonsCount);
-        setRefill(refill);
+        this.departureStation = validateString(departureStation);
+        this.arrivalStation = validateString(arrivalStation);
+        this.travelPrice = validateDoubleNum(travelPrice);
+        this.travelTime = validateDoubleNum(travelTime);
+        this.wagonsCount = validateNum(wagonsCount);
+        this.refill = validateString(refill);
     }
 
     @Override
@@ -48,9 +43,7 @@ public class Train extends Transport {
 
     public void setTravelPrice(double travelPrice) {
 
-        if (travelPrice > 0) {
-            this.travelPrice = travelPrice;
-        }
+        this.travelPrice = validateDoubleNum(travelPrice);
     }
 
     public double getTravelTime() {
@@ -59,9 +52,7 @@ public class Train extends Transport {
 
     public void setTravelTime(double travelTime) {
 
-        if (travelTime > 0) {
-            this.travelTime = travelTime;
-        }
+        this.travelTime = validateDoubleNum(travelTime);
     }
 
     public String getDepartureStation() {
@@ -78,9 +69,7 @@ public class Train extends Transport {
 
     public void setRefill(String refill) {
 
-        if (refill != null && !refill.isEmpty() && !refill.isBlank()) {
-            this.refill = refill;
-        }
+        this.refill = validateString(refill);
     }
 
     public int getWagonsCount() {
@@ -89,9 +78,7 @@ public class Train extends Transport {
 
     public void setWagonsCount(int wagonsCount) {
 
-        if (wagonsCount > 0) {
-            this.wagonsCount = wagonsCount;
-        }
+        this.wagonsCount = validateNum(wagonsCount);
     }
 
     @Override

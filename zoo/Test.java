@@ -4,9 +4,11 @@ public class Test {
     public static void main(String[] args) {
 
         Amphibians frog = new Amphibians("Frog1", 1, "swamp");
-        Amphibians snakeFreshwater = new Amphibians("Snake1", 5, "river");
+        Amphibians snakeFreshwater = new Amphibians("Snake1", -5, "river");
         frog.printInfo();
         snakeFreshwater.printInfo();
+        frog.eat();
+        snakeFreshwater.go();
         System.out.println(frog.equals(snakeFreshwater));
 
         Herbivores gazelle = new Herbivores("Gazelle1", 10, "savannah", 50,
@@ -15,7 +17,7 @@ public class Test {
                 "leaves and fruits");
         Herbivores horse = new Herbivores("Horse1", 12, "plain", 60,
                 "grass and hay");
-        giraffe.printInfo();
+        gazelle.printInfo();
         giraffe.printInfo();
         horse.printInfo();
         System.out.println(gazelle.equals(giraffe));

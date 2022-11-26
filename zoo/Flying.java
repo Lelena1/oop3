@@ -2,6 +2,8 @@ package zoo;
 
 import java.util.Objects;
 
+import static zoo.ValidateUtils.validateString;
+
 public class Flying extends Birds {
 
     String typeOfMovement;
@@ -13,7 +15,7 @@ public class Flying extends Birds {
     public Flying(String name, int age, String livingEnvironment, String typeOfMovement) {
         super(name, age, livingEnvironment);
 
-        setTypeOfMovement(typeOfMovement);
+        this.typeOfMovement = validateString(typeOfMovement);
     }
 
     public void fly() {
@@ -28,23 +30,22 @@ public class Flying extends Birds {
     }
 
     public void setTypeOfMovement(String typeOfMovement) {
-        if (typeOfMovement != null && !typeOfMovement.isEmpty() && !typeOfMovement.isBlank()) {
-            this.typeOfMovement = typeOfMovement;
-        } else {
-            this.typeOfMovement = "no information";
-        }
+        this.typeOfMovement = validateString(typeOfMovement);
     }
 
     @Override
     public void hunt() {
+        System.out.println("I hunt so as not to starve");
     }
 
     @Override
     public void eat() {
+        System.out.println("I eat my prey right away");
     }
 
     @Override
     public void go() {
+        System.out.println(" love flying");
     }
 
     @Override
